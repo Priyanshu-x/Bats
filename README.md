@@ -43,6 +43,26 @@ The launcher current supports these local projects:
 7.  **Chattr** (`Desktop/Chattr`) - Starts backend server.
 8.  **Ping Tool** (`Desktop/Bats/web-waker`) - Self-reference.
 
+## 🔧 How the Shortcuts Work (Batch Files)
+
+The desktop shortcuts (e.g., `SwitchProject.bat`) are simple Windows Batch files. You can create your own by opening Notepad, pasting the code below, and saving it as `.bat`.
+
+**Example Code:**
+```batch
+@echo off
+title My Tool Name
+cd /d "C:\Path\To\Your\Project"
+call npm start
+pause
+```
+
+**Breakdown:**
+- `@echo off`: Hides the command path (cleans up the view).
+- `title`: Sets the window title.
+- `cd /d`: Changes directory (the `/d` flag is crucial to switch drives if needed).
+- `call`: Runs the command (like `npm start` or `python main.py`).
+- `pause`: Keeps the window open so you can see if errors occurred (remove this if you want it to close auto).
+
 ---
 
 ## 📝 Change Log
