@@ -14,7 +14,7 @@ This repository acts as the central hub (Brain) for all my custom automation too
 ## 🚀 Projects & Tools
 
 ### 1. Web Waker
-**Location:** `c:\Users\himan\Desktop\ping\web-waker`
+**Location:** `c:\Users\himan\Desktop\Bats\web-waker`
 **Shortcut:** `Desktop\RunPingTool.bat`
 
 A simple Node.js script that fetches a list of URLs to ensure they are active (preventing cold starts on free tier hosting).
@@ -22,7 +22,7 @@ A simple Node.js script that fetches a list of URLs to ensure they are active (p
 - **Usage**: Double-click the desktop shortcut. It runs in parallel for speed.
 
 ### 2. Dev Launcher (Context Switcher)
-**Location:** `c:\Users\himan\Desktop\ping\dev-launcher`
+**Location:** `c:\Users\himan\Desktop\Bats\dev-launcher`
 **Shortcut:** `Desktop\SwitchProject.bat`
 
 An interactive CLI that sets up my environment for specific projects.
@@ -41,7 +41,7 @@ The launcher current supports these local projects:
 5.  **BlackBox** (`Desktop/BlackBox`) - Starts Python keylogger service.
 6.  **SnapDoc** (`Desktop/SnapDoc`) - Starts Python app.
 7.  **Chattr** (`Desktop/Chattr`) - Starts backend server.
-8.  **Ping Tool** (`Desktop/ping/web-waker`) - Self-reference.
+8.  **Ping Tool** (`Desktop/Bats/web-waker`) - Self-reference.
 
 ---
 
