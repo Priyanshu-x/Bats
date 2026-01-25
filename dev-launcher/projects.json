@@ -1,0 +1,90 @@
+[
+    {
+        "name": "Income Tracker",
+        "path": "C:\\Users\\himan\\Desktop\\Main Tracker\\income-tracker",
+        "editorCommand": "antigravity .",
+        "urls": [
+            "https://income-tracker-prika-x.vercel.app/",
+            "http://localhost:3000"
+        ],
+        "scripts": [
+            "npm run dev"
+        ]
+    },
+    {
+        "name": "P2P Chat",
+        "path": "C:\\Users\\himan\\Desktop\\p2p-chat",
+        "editorCommand": "antigravity .",
+        "urls": [
+            "https://p2p-chat-12sl.onrender.com/login.html",
+            "http://localhost:8080"
+        ],
+        "scripts": [
+            "npm start"
+        ]
+    },
+    {
+        "name": "StockOps",
+        "path": "C:\\Users\\himan\\Desktop\\stockops",
+        "editorCommand": "antigravity .",
+        "urls": [
+            "https://stockops.streamlit.app/"
+        ],
+        "scripts": [
+            "streamlit run src/main.py"
+        ]
+    },
+    {
+        "name": "DocSpace",
+        "path": "C:\\Users\\himan\\Desktop\\DocSpace",
+        "editorCommand": "antigravity .",
+        "urls": [
+            "https://docspace-neon.vercel.app/"
+        ],
+        "scripts": [
+            "node server/index.js"
+        ]
+    },
+    {
+        "name": "BlackBox",
+        "path": "C:\\Users\\himan\\Desktop\\BlackBox",
+        "editorCommand": "antigravity .",
+        "urls": [
+            "https://blackbox-v1.onrender.com/dashboard"
+        ],
+        "scripts": [
+            "python main.py"
+        ]
+    },
+    {
+        "name": "SnapDoc",
+        "path": "C:\\Users\\himan\\Desktop\\SnapDoc",
+        "editorCommand": "antigravity .",
+        "urls": [
+            "https://file-board.onrender.com/"
+        ],
+        "scripts": [
+            "python app.py"
+        ]
+    },
+    {
+        "name": "Chattr",
+        "path": "C:\\Users\\himan\\Desktop\\Chattr",
+        "editorCommand": "antigravity .",
+        "urls": [
+            "https://chat-app-backend-if16.onrender.com/"
+        ],
+        "scripts": [
+            "cd backend && npm run dev"
+        ]
+    },
+    {
+        "name": "Ping Tool",
+        "path": "C:\\Users\\himan\\Desktop\\ping\\web-waker",
+        "editorCommand": "antigravity .",
+        "urls": [],
+        "scripts": [
+            "npm start"
+        ]
+    }
+]
