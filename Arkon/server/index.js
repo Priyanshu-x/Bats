@@ -9,7 +9,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-    cors: { origin: "*" }
+    cors: { origin: "*" },
+    allowEIO3: true // Allow older clients (Android v2.x)
 });
 
 // Serve the Hacker Dashboard
@@ -94,9 +95,9 @@ io.on('connection', (socket) => {
             console.log(`[!] ANDROID DISCONNECTED`);
             androidSocketId = null;
         }
-        
+
         if (!pcSocketId && !androidSocketId) {
-             io.emit('status', 'OFFLINE');
+            io.emit('status', 'OFFLINE');
         }
         authenticatedClients.delete(socket.id);
     });
