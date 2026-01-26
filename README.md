@@ -46,7 +46,7 @@ The launcher current supports these local projects:
 
 ### 3. Arkon (Remote Control)
 **Location:** `c:\Users\himan\Desktop\Bats\Arkon`
-**Shortcut:** `Desktop\Bats\StartArkon.bat`
+**Shortcut:** `Desktop\Bats\Arkon.bat`
 
 A remote administration tool that gives you control over a target PC via a mobile-optimized web dashboard.
 - **Configuration**: Edit `Arkon/client/arkon.py` with your Render URL.
