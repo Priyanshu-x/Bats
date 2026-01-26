@@ -8,6 +8,7 @@ This repository acts as the central hub (Brain) for all my custom automation too
 | :--- | :--- | :--- |
 | **Web Waker** | `/web-waker` | Pings my deployed apps on Render/Vercel to wake them up. |
 | **Dev Launcher** | `/dev-launcher` | CLI tool to instantly switch projects, opening Editor, Tabs, and Servers. |
+| **Arkon** | `/Arkon` | Remote Administration Tool (RAT) with Cloud Server and Standalone Client. |
 
 ---
 
@@ -43,45 +44,20 @@ The launcher current supports these local projects:
 7.  **Chattr** (`Desktop/Chattr`) - Starts backend server.
 8.  **Ping Tool** (`Desktop/Bats/web-waker`) - Self-reference.
 
+### 3. Arkon (Remote Control)
+**Location:** `c:\Users\himan\Desktop\Bats\Arkon`
+**Shortcut:** `Desktop\Bats\StartArkon.bat`
+
+A remote administration tool that gives you control over a target PC via a mobile-optimized web dashboard.
+- **Configuration**: Edit `Arkon/client/arkon.py` with your Render URL.
+- **Features**: Remote Lock, Voice of God, Force Open, Minimize All.
+- **Usage**: Run `StartArkon.bat` for local testing, or deploy Server to Render and build Client EXE for remote control.
+
 ## 🔧 How the Shortcuts Work (Batch Files)
 
 The desktop shortcuts (e.g., `SwitchProject.bat`) are simple Windows Batch files. You can create your own by opening Notepad, pasting the code below, and saving it as `.bat`.
 
-**Example Code:**
-```batch
-@echo off
-title My Tool Name
-cd /d "C:\Path\To\Your\Project"
-call npm start
-pause
-```
 
-**Breakdown:**
-- `@echo off`: Hides the command path (cleans up the view).
-- `title`: Sets the window title.
-- `cd /d`: Changes directory (the `/d` flag is crucial to switch drives if needed).
-- `call`: Runs the command (like `npm start` or `python main.py`).
-- `pause`: Keeps the window open so you can see if errors occurred (remove this if you want it to close auto).
-
-## 👑 Arkon: Running on a Second PC
-
-To control a different computer on your network:
-
-1.  **On Main PC (Server):**
-    - Open Command Prompt and type `ipconfig`.
-    - Note your IPv4 Address (e.g., `192.168.1.10`).
-    - Keep `StartArkon` running.
-
-2.  **On Second PC (Target):**
-    - Copy the `Bats/Arkon/client` folder to this PC.
-    - Install Python.
-    - Run `pip install -r requirements.txt`.
-    - Edit `arkon.py`: Change `SERVER_URL` from `localhost` to your Main PC's IP (e.g., `http://192.168.1.10:3000`).
-    - Run `python arkon.py`.
-
-*Note: The Arkon Ruler currently controls one target at a time. The last PC to connect becomes the active target.*
-
----
 
 ## 📝 Change Log
 - **[2026-01-25]**: Added `Dev Launcher` with support for 8 projects.

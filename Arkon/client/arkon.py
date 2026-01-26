@@ -8,7 +8,7 @@ import os
 import sys
 
 # Server Configuration
-SERVER_URL = "http://localhost:3000"  # Change this to Render URL later
+SERVER_URL = "https://arkon-ruler.onrender.com"  # Change this to Render URL later
 
 # Initialize Socket.io Client
 sio = socketio.Client()
