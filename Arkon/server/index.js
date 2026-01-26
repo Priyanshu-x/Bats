@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
- cors: { origin: "*" }
+    cors: { origin: "*" }
 });
 
 // Serve the Hacker Dashboard
@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
     });
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
     console.log(`\n>>> ARKON RELAY ID: [${PORT}] <<<\n`);
 });
