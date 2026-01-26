@@ -3,6 +3,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import 'dotenv/config'; // Load environment variables
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -14,9 +15,16 @@ const io = new Server(httpServer, {
 // Serve the Hacker Dashboard
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Security Check
+if (!process.env.AUTH_PASSWORD) {
+    console.error("FATAL ERROR: AUTH_PASSWORD environment variable is missing.");
+    console.error("Please set it in a .env file or your cloud provider settings.");
+    process.exit(1); // Crash connection if insecure
+}
+
 // Store connected clients
 let pcSocketId = null;
-const AUTH_PASSWORD = process.env.AUTH_PASSWORD || 'admin';
+const AUTH_PASSWORD = process.env.AUTH_PASSWORD;
 const authenticatedClients = new Set();
 
 io.on('connection', (socket) => {
