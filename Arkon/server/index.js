@@ -16,6 +16,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Store connected clients
 let pcSocketId = null;
+const AUTH_PASSWORD = process.env.AUTH_PASSWORD || 'admin';
+const authenticatedClients = new Set();
 
 io.on('connection', (socket) => {
     console.log(`[+] Connection: ${socket.id}`);
@@ -32,8 +34,25 @@ io.on('connection', (socket) => {
         }
     });
 
+    // Authentication Request
+    socket.on('login', (password) => {
+        if (password === AUTH_PASSWORD) {
+            authenticatedClients.add(socket.id);
+            socket.emit('login_success');
+            console.log(`[V] AUTH SUCCESS: ${socket.id}`);
+        } else {
+            socket.emit('login_fail');
+            console.log(`[X] AUTH FAILED: ${socket.id}`);
+        }
+    });
+
     // Relay Commands from Phone -> PC
     socket.on('command', (data) => {
+        if (!authenticatedClients.has(socket.id)) {
+            console.log(`[!] UNAUTHORIZED COMMAND ATTEMPT: ${socket.id}`);
+            return;
+        }
+
         if (pcSocketId) {
             console.log(`[>] RELAYING COMMAND: ${data.action}`);
             io.to(pcSocketId).emit('execute', data);
@@ -48,6 +67,7 @@ io.on('connection', (socket) => {
             pcSocketId = null;
             io.emit('status', 'OFFLINE');
         }
+        authenticatedClients.delete(socket.id);
     });
 });
 
