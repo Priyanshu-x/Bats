@@ -1,0 +1,15 @@
+{
+    "name": "arkon-server",
+    "version": "1.0.0",
+    "description": "Relay server for Arkon Remote Control",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "socket.io": "^4.7.4",
+        "cors": "^2.8.5"
+    }
+}

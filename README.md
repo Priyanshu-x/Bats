@@ -63,6 +63,24 @@ pause
 - `call`: Runs the command (like `npm start` or `python main.py`).
 - `pause`: Keeps the window open so you can see if errors occurred (remove this if you want it to close auto).
 
+## 👑 Arkon: Running on a Second PC
+
+To control a different computer on your network:
+
+1.  **On Main PC (Server):**
+    - Open Command Prompt and type `ipconfig`.
+    - Note your IPv4 Address (e.g., `192.168.1.10`).
+    - Keep `StartArkon` running.
+
+2.  **On Second PC (Target):**
+    - Copy the `Bats/Arkon/client` folder to this PC.
+    - Install Python.
+    - Run `pip install -r requirements.txt`.
+    - Edit `arkon.py`: Change `SERVER_URL` from `localhost` to your Main PC's IP (e.g., `http://192.168.1.10:3000`).
+    - Run `python arkon.py`.
+
+*Note: The Arkon Ruler currently controls one target at a time. The last PC to connect becomes the active target.*
+
 ---
 
 ## 📝 Change Log

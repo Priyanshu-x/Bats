@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARKON // RULER</title>
+    <style>
+        :root { --neon: #00ff41; --danger: #ff0055; --bg: #0d0d0d; }
+        body {
+            background-color: var(--bg);
+            color: var(--neon);
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            user-select: none;
+        }
+        h1 { border-bottom: 2px solid var(--neon); padding-bottom: 10px; letter-spacing: 5px; }
+        .status { margin-bottom: 30px; font-size: 1.2rem; }
+        .grid { display: grid; gap: 15px; grid-template-columns: 1fr 1fr; }
+        
+        button {
+            background: transparent;
+            border: 2px solid var(--neon);
+            color: var(--neon);
+            padding: 20px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+        button:active { background: var(--neon); color: var(--bg); transform: scale(0.98); }
+        button.danger { border-color: var(--danger); color: var(--danger); }
+        button.danger:active { background: var(--danger); color: white; }
+
+        input {
+            width: 100%; box-sizing: border-box;
+            background: #000; border: 1px solid #333;
+            color: white; padding: 10px; margin-top: 10px;
+            font-family: inherit; display: none;
+        }
+        #terminal {
+            margin-top: 30px; opacity: 0.7; font-size: 0.8rem;
+            text-align: left; height: 100px; overflow-y: auto;
+            border-top: 1px solid #333; padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ARKON</h1>
+    <div class="status" id="status">[WAITING FOR TARGET...]</div>
+
+    <div class="grid">
+        <button onclick="cmd('LOCK')" class="danger">LOCK WORKSTATION</button>
+        <button onclick="cmd('MINIMIZE')">MINIMIZE ALL</button>
+        
+        <button onclick="toggleInput('speak')">VOICE OF GOD</button>
+        <button onclick="toggleInput('open')">FORCE OPEN</button>
+    </div>
+
+    <input type="text" id="speak_input" placeholder="Enter text to speak..." onchange="sendInput('SPEAK', this.value)">
+    <input type="text" id="open_input" placeholder="Enter URL..." onchange="sendInput('OPEN', this.value)">
+
+    <div id="terminal"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const term = document.getElementById('terminal');
+        const statusEl = document.getElementById('status');
+        
+        // Identify as Mobile Controller
+        socket.emit('identify', 'mobile');
+
+        socket.on('status', (state) => {
+            statusEl.innerText = state === 'ONLINE' ? '[TARGET ACQUIRED]' : '[TARGET LOST]';
+            statusEl.style.color = state === 'ONLINE' ? '#00ff41' : '#ff0055';
+            log(`System status: ${state}`);
+        });
+
+        function cmd(action) {
+            if (navigator.vibrate) navigator.vibrate(50);
+            socket.emit('command', { action });
+            log(`Sent command: ${action}`);
+        }
+
+        function sendInput(action, value) {
+            socket.emit('command', { action, value });
+            log(`Sent payload: ${action} -> ${value}`);
+            document.getElementById('speak_input').style.display = 'none';
+            document.getElementById('open_input').style.display = 'none';
+        }
+
+        function toggleInput(type) {
+            const el = document.getElementById(`${type}_input`);
+            el.style.display = el.style.display === 'block' ? 'none' : 'block';
+            el.focus();
+        }
+
+        function log(msg) {
+            term.innerHTML += `> ${msg}<br>`;
+            term.scrollTop = term.scrollHeight;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+python-socketio[client]
+pyttsx3
+pyautogui
+requests

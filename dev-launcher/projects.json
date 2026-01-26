@@ -79,7 +79,7 @@
         ]
     },
     {
-        "name": "Ping Tool",
+        "name": "Web Waker",
         "path": "C:\\Users\\himan\\Desktop\\Bats\\web-waker",
         "editorCommand": "antigravity .",
         "urls": [],
