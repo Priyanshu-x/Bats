@@ -4,7 +4,7 @@
         "path": "C:\\Users\\himan\\Desktop\\Main Tracker\\income-tracker",
         "editorCommand": "antigravity .",
         "urls": [
-            "https://income-tracker-prika-x.vercel.app/",
+            "https://kaizen-log.vercel.app/",
             "http://localhost:3000"
         ],
         "scripts": [
@@ -16,7 +16,7 @@
         "path": "C:\\Users\\himan\\Desktop\\p2p-chat",
         "editorCommand": "antigravity .",
         "urls": [
-            "https://p2p-chat-12sl.onrender.com/login.html",
+            "https://p2p-chat-x.onrender.com/login.html",
             "http://localhost:8080"
         ],
         "scripts": [
@@ -39,7 +39,7 @@
         "path": "C:\\Users\\himan\\Desktop\\DocSpace",
         "editorCommand": "antigravity .",
         "urls": [
-            "https://docspace-neon.vercel.app/"
+            "https://docspace-x.vercel.app/"
         ],
         "scripts": [
             "node server/index.js"
@@ -72,7 +72,7 @@
         "path": "C:\\Users\\himan\\Desktop\\Chattr",
         "editorCommand": "antigravity .",
         "urls": [
-            "https://chat-app-backend-if16.onrender.com/"
+            "https://chattr-x.onrender.com/"
         ],
         "scripts": [
             "cd backend && npm run dev"
