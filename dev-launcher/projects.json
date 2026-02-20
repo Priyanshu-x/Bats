@@ -1,7 +1,7 @@
 [
     {
-        "name": "Income Tracker",
-        "path": "C:\\Users\\himan\\Desktop\\Main Tracker\\income-tracker",
+        "name": "Main Tracker",
+        "path": "C:\\Users\\himan\\Desktop\\Main Tracker",
         "editorCommand": "antigravity .",
         "urls": [
             "https://kaizen-log.vercel.app/",

