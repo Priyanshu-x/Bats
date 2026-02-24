@@ -4,11 +4,7 @@
         "path": "C:\\Users\\himan\\Desktop\\Main Tracker",
         "editorCommand": "antigravity .",
         "urls": [
-            "https://kaizen-log.vercel.app/",
-            "http://localhost:3000"
-        ],
-        "scripts": [
-            "npm run dev"
+            "https://kaizen-log.vercel.app/"
         ]
     },
     {

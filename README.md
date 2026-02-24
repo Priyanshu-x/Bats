@@ -35,7 +35,7 @@ An interactive CLI that sets up my environment for specific projects.
 
 #### Managed Projects:
 The launcher current supports these local projects:
-1.  **Income Tracker** (`Desktop/Main Tracker/income-tracker`)
+1.  **Main Tracker** (`Desktop/Main Tracker`)
 2.  **P2P Chat** (`Desktop/p2p-chat`)
 3.  **StockOps** (`Desktop/stockops`) - Starts Streamlit.
 4.  **DocSpace** (`Desktop/DocSpace`) - Starts Node server.
