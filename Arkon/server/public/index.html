@@ -147,6 +147,12 @@
     <input type="text" id="speak_input" placeholder="Enter text to speak..." onchange="sendInput('SPEAK', this.value)">
     <input type="text" id="open_input" placeholder="Enter URL..." onchange="sendInput('OPEN', this.value)">
 
+    <div id="camera-preview"
+        style="margin: 20px auto; border: 2px solid var(--neon); padding: 5px; display: none; max-width: 500px;">
+        <div style="font-size: 0.7rem; margin-bottom: 5px;">[LAST CAMERA SHOT]</div>
+        <img id="shot-img" src="" style="width: 100%; border: 1px solid var(--neon);">
+    </div>
+
     <div id="location-box" style="margin: 20px 0; border: 1px dashed var(--neon); padding: 10px;">
         <a id="maps-link" href="#" target="_blank" style="color: var(--neon); text-decoration: none;">[NO GPS DATA]</a>
     </div>
