@@ -284,7 +284,14 @@
 
         // Notifications
         socket.on('notification', (data) => {
-            log(`📩 [${data.app}] ${data.title}: ${data.text}`, 'neon');
+            const notifBox = document.getElementById('notifications');
+            const item = document.createElement('div');
+            item.style.marginBottom = '5px';
+            item.style.borderBottom = '1px solid #222';
+            item.innerHTML = `<span style="color:#666; font-size:0.75rem;">[${new Date().toLocaleTimeString()}]</span> <span style="color:var(--neon)">${data.app}</span>: <b>${data.title}</b> - ${data.text}`;
+            notifBox.appendChild(item);
+            notifBox.scrollTop = notifBox.scrollHeight;
+            log(`📩 Intercepted from ${data.app}`);
         });
 
         // Vitals
