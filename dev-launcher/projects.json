@@ -53,8 +53,8 @@
         ]
     },
     {
-        "name": "SnapDoc",
-        "path": "C:\\Users\\himan\\Desktop\\SnapDoc",
+        "name": "FileBoard",
+        "path": "C:\\Users\\himan\\Desktop\\file-board",
         "editorCommand": "antigravity .",
         "urls": [
             "https://file-board.onrender.com/"
