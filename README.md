@@ -38,7 +38,7 @@ The launcher current supports these local projects:
 1.  **Main Tracker** (`Desktop/Main Tracker`)
 2.  **P2P Chat** (`Desktop/p2p-chat`)
 3.  **StockOps** (`Desktop/stockops`) - Starts Streamlit.
-4.  **DocSpace** (`Desktop/DocSpace`) - Starts Node server.
+4.  **File-Board** (`Desktop/File-Board`) - Starts Node server.
 5.  **BlackBox** (`Desktop/BlackBox`) - Starts Python keylogger service.
 6.  **SnapDoc** (`Desktop/SnapDoc`) - Starts Python app.
 7.  **Chattr** (`Desktop/Chattr`) - Starts backend server.
